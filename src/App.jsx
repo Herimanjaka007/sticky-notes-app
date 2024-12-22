@@ -2,7 +2,7 @@ import NotesPage from './pages/NotesPage';
 
 const App = () => {
   return (
-    <div>
+    <div id='app'>
       <NotesPage />
     </div>
   );

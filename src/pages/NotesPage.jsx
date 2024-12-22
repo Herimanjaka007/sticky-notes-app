@@ -1,7 +1,10 @@
+import { fakeData as notes } from "../assets/fakeData";
+import NoteCard from "../components/NoteCard";
+
 const NotesPage = () => {
     return (
         <div>
-            Notes pages.
+            {notes.map(note => <NoteCard key={note.$id} note={note}/>)}
         </div>
     );
 }
