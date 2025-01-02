@@ -3,6 +3,9 @@ import Trash from "../icons/Trash";
 import { useEffect } from "react";
 import { useState } from "react";
 
+import { setNewOffset, setZIndex } from "../utils";
+import { autoGrow } from "../utils";
+
 const NoteCard = ({ note }) => {
     const body = JSON.parse(note.body);
     const colors = JSON.parse(note.colors);
@@ -13,13 +16,8 @@ const NoteCard = ({ note }) => {
     const mouseStartPos = { x: 0, y: 0 };
     const cardRef = useRef(null);
 
-    const autoGrow = (textareaRef) => {
-        const {current} = textareaRef;
-        current.style.height = "auto";
-        current.style.height = current.scrollHeight + "px";
-    };
-
     const mouseDown = (e) => {
+        setZIndex(cardRef.current);
         mouseStartPos.x = e.clientX;
         mouseStartPos.y = e.clientY;
     
@@ -35,11 +33,10 @@ const NoteCard = ({ note }) => {
     
         mouseStartPos.x = e.clientX;
         mouseStartPos.y = e.clientY;
+
+        const newPosition = setNewOffset(cardRef.current, mouseMoveDir);
     
-        setPosition({
-            x: cardRef.current.offsetLeft - mouseMoveDir.x,
-            y: cardRef.current.offsetTop - mouseMoveDir.y,
-        });
+        setPosition(newPosition);
     };
 
     const mouseUp = () => {
