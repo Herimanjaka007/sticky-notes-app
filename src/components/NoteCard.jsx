@@ -3,11 +3,11 @@ import Trash from "../icons/Trash";
 import { useEffect } from "react";
 import { useState } from "react";
 
-import { setNewOffset, setZIndex } from "../utils";
+import { bodyParser, setNewOffset, setZIndex } from "../utils";
 import { autoGrow } from "../utils";
 
 const NoteCard = ({ note }) => {
-    const body = JSON.parse(note.body);
+    const body = bodyParser(note.body);
     const colors = JSON.parse(note.colors);
     
     const textareaRef = useRef(null);
